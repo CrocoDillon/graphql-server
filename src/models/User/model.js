@@ -86,6 +86,7 @@ User.getToken = async function getToken(email, password) {
   assert(valid, 'Unable to generate token') // Don’t leak any details
 
   return jsonwebtoken.sign({
+    id: user.id,
     name: user.name,
     roles: user.roles
   }, JWT_SECRET)

@@ -20,6 +20,15 @@ export const token = {
   resolve: (source, { email, password }) => User.getToken(email, password)
 }
 
+export const viewer = {
+  description: 'Returns the currently logged in user',
+  type: UserType,
+  resolve: async ({ viewer, loaders }) => {
+    assert(viewer, 'You’re not logged in')
+    return await loaders['User'].load(viewer.id)
+  }
+}
+
 export const user = {
   description: 'Returns a user given its global id',
   type: UserType,

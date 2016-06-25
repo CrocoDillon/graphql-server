@@ -1,7 +1,7 @@
 // @flow
 import { GraphQLObjectType, GraphQLSchema } from 'graphql'
 
-import { node, token, user, users, createUser, updateUser, deleteUser, story, stories, createStory, updateStory, deleteStory } from './models'
+import { node, token, viewer, user, users, createUser, updateUser, deleteUser, story, stories, createStory, updateStory, deleteStory } from './models'
 
 const query = new GraphQLObjectType({
   name: 'Query',
@@ -9,6 +9,7 @@ const query = new GraphQLObjectType({
   fields: () => ({
     node,
     token,
+    viewer,
     user,
     users,
     story,
