@@ -17,12 +17,13 @@ export default async function controller(ctx: KoaContext): Promise<void> {
   }
 
   const { authorization } = ctx.header
-  const { query, variables, ...rest } = ctx.request.body
+  const { query, variables, operationName } = ctx.request.body
 
   const viewer = verifyViewer(authorization)
   const loaders = createLoaders(viewer)
+  const context = { viewer, loaders }
 
-  const result = await graphql(schema, query, { ...rest, viewer, loaders }, variables || {})
+  const result = await graphql(schema, query, null, context, variables, operationName)
 
   if (result.errors) {
     // TODO: Log errors so we can fix them

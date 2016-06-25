@@ -22,7 +22,7 @@ const UserType = new GraphQLObjectType({
     stories: {
       description: 'List of stories told by this user',
       type: new GraphQLList(StoryType),
-      resolve: (user, args, context, info) => info.rootValue.loaders['Story'].loadMany(user.stories)
+      resolve: (user, args, { loaders }) => loaders['Story'].loadMany(user.stories)
     }
   })
 })

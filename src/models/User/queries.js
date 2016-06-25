@@ -24,7 +24,7 @@ export const token = {
 export const viewer = {
   description: 'Returns the currently logged in user',
   type: UserType,
-  resolve: async ({ viewer, loaders }) => {
+  resolve: async (source, args, { viewer, loaders }) => {
     assert(viewer, 'You’re not logged in')
     return await loaders['User'].load(viewer.id)
   }
@@ -39,7 +39,7 @@ export const user = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const { type, id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
@@ -52,5 +52,5 @@ export const user = {
 export const users = {
   description: 'Returns a list of users',
   type: new GraphQLList(UserType),
-  resolve: ({ viewer }) => User.find(viewer)
+  resolve: (source, args, { viewer }) => User.find(viewer)
 }

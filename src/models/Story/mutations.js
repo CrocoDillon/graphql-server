@@ -11,7 +11,7 @@ export const createStory = {
     author: { type: new GraphQLNonNull(GraphQLID) },
     body: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const authorId = fromGid(args.author).id
     const author = await loaders['User'].load(authorId)
 
@@ -36,7 +36,7 @@ export const updateStory = {
     id: { type: new GraphQLNonNull(GraphQLID) },
     body: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 
@@ -53,7 +53,7 @@ export const deleteStory = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 

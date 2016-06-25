@@ -14,7 +14,7 @@ const StoryType = new GraphQLObjectType({
     author: {
       description: 'The user that authored this story',
       type: UserType,
-      resolve: (story, args, context, info) => info.rootValue.loaders['User'].load(story.author)
+      resolve: (story, args, { loaders }) => loaders['User'].load(story.author)
     },
     body: {
       description: 'The content of this story',

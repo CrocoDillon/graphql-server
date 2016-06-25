@@ -12,7 +12,7 @@ export const createUser = {
     email: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args) => {
     const user = new User({
       ...args,
       password: await User.encryptPassword(args.password)
@@ -30,7 +30,7 @@ export const updateUser = {
     email: { type: GraphQLString },
     password: { type: GraphQLString }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const { type, id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
@@ -53,7 +53,7 @@ export const deleteUser = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  resolve: async ({ loaders }, args) => {
+  resolve: async (source, args, { loaders }) => {
     const { type, id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
