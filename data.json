@@ -4,28 +4,28 @@
       "id": "3c93786230569de834c64f93",
       "name": "H.G. Wells",
       "email": "wells@graphql.org",
-      "password": "",
+      "password": "$2a$10$fzz9STJlDb9En4q3gtLff.RXxzKolnV3qQr0DhN1A222q3quVQ6ZO",
       "stories": ["8dbff78d287652b867678357", "5cbba191905f6160f4b39365", "ed0fdb79505bbdaa7bafc609"]
     },
     "88fbd5c0747ff60213b1ef22": {
       "id": "88fbd5c0747ff60213b1ef22",
       "name": "Edgar Allan Poe",
       "email": "poe@graphql.org",
-      "password": "",
+      "password": "$2a$10$D83M66mRwZwCLhhC8a4RseECdb8KCg7N6IxZFH5OflnIlL9KfMKNC",
       "stories": []
     },
     "d742aeac61abb98f5133ab45": {
       "id": "d742aeac61abb98f5133ab45",
       "name": "Jules Verne",
       "email": "verne@graphql.org",
-      "password": "",
+      "password": "$2a$10$bPcQMIMv4dmEq5hK/hd36eq/8KMpmkt4MGr5ks3nxoKhWv/lwfHHC",
       "stories": ["29ca2bda1b2c6b824aae3571", "24373f3c5ec9bcf5675944fd"]
     },
     "5331ef9454b7d7fe67f9a258": {
       "id": "5331ef9454b7d7fe67f9a258",
       "name": "Ian Fleming",
       "email": "fleming@graphql.org",
-      "password": "",
+      "password": "$2a$10$KYf699fRl.61rmn.0/CniuA5Q9xd7yqm2367R9icaFTPxuWHybVoW",
       "stories": []
     }
   },
