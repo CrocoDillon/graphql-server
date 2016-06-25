@@ -1,7 +1,7 @@
 // @flow
 import path from 'path'
 import fs from 'fs'
-import { graphql } from 'graphql'
+import { graphql, formatError } from 'graphql'
 import DataLoader from 'dataloader'
 
 import schema from './schema'
@@ -25,8 +25,8 @@ export default async function controller(ctx: KoaContext): Promise<void> {
   const result = await graphql(schema, query, { ...rest, viewer, loaders }, variables || {})
 
   if (result.errors) {
-    // log errors so we can fix them
-    console.log(result.errors)
+    // TODO: Log errors so we can fix them
+    result.errors = result.errors.map(formatError)
   }
 
   ctx.body = result
