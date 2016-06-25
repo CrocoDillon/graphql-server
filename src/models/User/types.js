@@ -1,5 +1,6 @@
 // @flow
 import { GraphQLObjectType, GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql'
+
 import { NodeInterface } from '../Node'
 import { StoryType } from '../Story'
 import { createGidField } from '../helpers'

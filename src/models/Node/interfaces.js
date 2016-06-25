@@ -1,5 +1,6 @@
 // @flow
 import { GraphQLInterfaceType, GraphQLNonNull, GraphQLID } from 'graphql'
+
 import User, { UserType } from '../User'
 import Story, { StoryType } from '../Story'
 

@@ -1,5 +1,6 @@
 // @flow
 import { GraphQLNonNull, GraphQLID } from 'graphql'
+
 import NodeInterface from './interfaces'
 import { fromGid } from '../helpers'
 

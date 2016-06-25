@@ -1,4 +1,4 @@
-export { NodeInterface, node } from './Node'
+export { NodeInterface, nodeQueries } from './Node'
 
-export User, { UserType, token, viewer, user, users, createUser, updateUser, deleteUser } from './User'
-export Story, { StoryType, story, stories, createStory, updateStory, deleteStory } from './Story'
+export User, { UserType, userQueries, userMutations } from './User'
+export Story, { StoryType, storyQueries, storyMutations } from './Story'

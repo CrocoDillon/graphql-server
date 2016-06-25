@@ -1,5 +1,6 @@
 // @flow
 import { GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql'
+
 import Story from './model'
 import StoryType from './types'
 import { assert, fromGid } from '../helpers'

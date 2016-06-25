@@ -2,5 +2,5 @@ export default from './model'
 
 export UserType from './types'
 
-export { token, viewer, user, users } from './queries'
-export { createUser, updateUser, deleteUser } from './mutations'
+export * as userQueries from './queries'
+export * as userMutations from './mutations'

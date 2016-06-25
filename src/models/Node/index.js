@@ -1,3 +1,3 @@
 export NodeInterface from './interfaces'
 
-export { node } from './queries'
+export * as nodeQueries from './queries'
