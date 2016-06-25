@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+// Polyfills
+require('core-js/shim')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('babel-register')
+
+  if (require('piping')({ hook: true })) {
+    require('../src')
+  }
+} else {
+  require('../lib')
+}

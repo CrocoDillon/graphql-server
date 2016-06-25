@@ -1,0 +1,56 @@
+{
+  "name": "graphql-server",
+  "version": "0.1.0",
+  "description": "GraphQL server with JSON Web Token authentication",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "./bin/server",
+    "start": "NODE_ENV=production ./bin/server",
+    "build": "NODE_ENV=production babel src --out-dir lib --copy-files",
+    "clean": "rm -rf lib",
+    "check": "npm run lint && npm run test && npm run flow",
+    "lint": "eslint .",
+    "test": "NODE_ENV=test mocha mocha.config.js",
+    "flow": "flow",
+    "flow:stop": "flow stop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CrocoDillon/graphql-server.git"
+  },
+  "keywords": [
+    "graphiql",
+    "graphql",
+    "relay",
+    "koa",
+    "jsonwebtoken",
+    "jwt"
+  ],
+  "author": "Dillon de Voor (http://crocodillon.com)",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "core-js": "^2.4.0",
+    "dataloader": "^1.2.0",
+    "graphql": "^0.6.0",
+    "jsonwebtoken": "^7.0.1",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.1.0",
+    "koa-router": "^7.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-eslint": "^6.0.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-syntax-flow": "^6.8.0",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-preset-es2015-node6": "^0.2.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "eslint": "^2.13.0",
+    "eslint-plugin-flow-vars": "^0.4.0",
+    "eslint-plugin-flowtype": "^2.2.7",
+    "flow-bin": "^0.27.0",
+    "piping": "^1.0.0-rc.2"
+  }
+}

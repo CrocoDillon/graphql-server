@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GraphiQL</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+    <link href="//cdn.jsdelivr.net/graphiql/0.7.1/graphiql.css" rel="stylesheet" />
+    <script src="//cdn.jsdelivr.net/fetch/0.9.0/fetch.min.js"></script>
+    <script src="//cdn.jsdelivr.net/react/15.0.0/react.min.js"></script>
+    <script src="//cdn.jsdelivr.net/react/15.0.0/react-dom.min.js"></script>
+    <script src="//cdn.jsdelivr.net/graphiql/0.7.1/graphiql.min.js"></script>
+  </head>
+  <body>
+    <script>
+      'use strict'
+      var CustomGraphiQL = React.createClass({
+        getInitialState: function () {
+          return { token: localStorage.getItem('token') }
+        },
+        handleReceiveToken: function (token) {
+          this.setState({ token: token })
+          localStorage.setItem('token', token)
+        },
+        handleRemoveToken: function () {
+          this.setState({ token: null })
+          localStorage.removeItem('token')
+        },
+        fetcher: function (params) {
+          var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+
+          if (this.state.token) {
+            headers['Authorization'] = 'Bearer ' + this.state.token
+          }
+
+          return fetch(location.origin + '/graphql', {
+            method: 'post',
+            headers: headers,
+            body: JSON.stringify(params)
+          }).then(function (response) {
+            return response.json()
+          }).then(function (json) {
+            if (json.data && json.data.token) {
+              this.handleReceiveToken(json.data.token)
+            }
+            return json
+          }.bind(this))
+        },
+        render: function () {
+          return React.createElement(
+            GraphiQL,
+            { fetcher: this.fetcher },
+            this.state.token ?
+              React.createElement(
+                GraphiQL.Toolbar,
+                null,
+                React.createElement(
+                  GraphiQL.ToolbarButton,
+                  {
+                    onClick: this.handleRemoveToken,
+                    label: 'Logout'
+                  }
+                )
+              ) :
+              null
+          )
+        }
+      })
+
+      ReactDOM.render(React.createElement(CustomGraphiQL, null), document.body)
+    </script>
+  </body>
+</html>
