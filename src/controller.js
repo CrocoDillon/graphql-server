@@ -2,10 +2,10 @@
 import path from 'path'
 import fs from 'fs'
 import { graphql, formatError } from 'graphql'
-import DataLoader from 'dataloader'
 
 import schema from './schema'
-import { User, Story } from './models'
+import { User } from './models'
+import { createLoaders } from './models/helpers'
 
 const graphiql = fs.readFileSync(path.join(__dirname, 'graphiql.html'), 'utf8')
 
@@ -59,11 +59,4 @@ function verifyViewer(authorization: ?string): ?Object {
   }
 
   return User.verifyToken(token)
-}
-
-function createLoaders(viewer: ?Object): Object {
-  return {
-    User: new DataLoader(ids => User.gen(viewer, ids)),
-    Story: new DataLoader(ids => Story.gen(viewer, ids))
-  }
 }

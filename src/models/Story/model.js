@@ -39,6 +39,6 @@ Story.gen = async function gen(viewer: ?Object, ids: Array<string>): Promise<Arr
   })
 }
 
-Story.find = async function find(viewer: ?Object): Promise<Array<Story>> {
+Story.find = async function find(viewer: ?Object): Promise<Array<Story>> { // eslint-disable-line no-unused-vars
   return Object.values(data.stories).map(storyData => new Story(storyData))
 }

@@ -51,7 +51,7 @@ User.gen = async function gen(viewer: ?Object, ids: Array<string>): Promise<Arra
   })
 }
 
-User.find = async function find(viewer: ?Object): Promise<Array<User>> {
+User.find = async function find(viewer: ?Object): Promise<Array<User>> { // eslint-disable-line no-unused-vars
   return Object.values(data.users).map(userData => new User(userData))
 }
 
@@ -88,8 +88,7 @@ User.getToken = async function getToken(email, password) {
 
   return jsonwebtoken.sign({
     id: user.id,
-    name: user.name,
-    roles: user.roles
+    name: user.name
   }, JWT_SECRET)
 }
 

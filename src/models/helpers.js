@@ -1,5 +1,9 @@
 // @flow
 import { GraphQLNonNull, GraphQLID } from 'graphql'
+import DataLoader from 'dataloader'
+
+import User from './User'
+import Story from './Story'
 
 const types = ['User', 'Story']
 const idRe = /^[0-9a-f]{24}$/
@@ -10,7 +14,7 @@ export function assert(value: mixed, message: string): void {
   throw new Error(message)
 }
 
-export function createGidField(type: string): GraphQLFieldConfig {
+export function createGidField(type: string): Object {
   assert(types.includes(type), `Expected a type and instead saw '${ type }'`)
 
   return {
@@ -42,4 +46,11 @@ export function randomId(): string {
     digits[i] = Math.floor(16 * Math.random()).toString(16)
   }
   return digits.join('')
+}
+
+export function createLoaders(viewer: ?Object): Object {
+  return {
+    User: new DataLoader(ids => User.gen(viewer, ids)),
+    Story: new DataLoader(ids => Story.gen(viewer, ids))
+  }
 }

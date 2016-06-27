@@ -15,7 +15,7 @@ export const story = {
     }
   },
   resolve: async (source, args, { loaders }) => {
-    const { type, id } = fromGid(args.id)
+    const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 
     assert(story, `${ args.id } not found`)

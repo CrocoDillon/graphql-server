@@ -231,7 +231,7 @@ module.exports = {
     // disallow specified global variables
     'no-restricted-globals': 2,
     // disallow var declarations from shadowing variables in the outer scope
-    'no-shadow': [2, { allow: ['resolve', 'reject'] }],
+    'no-shadow': 0,
     // disallow identifiers from shadowing restricted names
     'no-shadow-restricted-names': 2,
     // disallow the use of undeclared variables unless mentioned in /*global */ comments

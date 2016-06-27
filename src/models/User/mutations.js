@@ -31,7 +31,7 @@ export const updateUser = {
     password: { type: GraphQLString }
   },
   resolve: async (source, args, { loaders }) => {
-    const { type, id } = fromGid(args.id)
+    const { id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
     assert(user, `${ args.id } not found`)
@@ -54,7 +54,7 @@ export const deleteUser = {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
   resolve: async (source, args, { loaders }) => {
-    const { type, id } = fromGid(args.id)
+    const { id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
     assert(user, `${ args.id } not found`)
