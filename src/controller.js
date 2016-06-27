@@ -17,7 +17,7 @@ export default async function controller(ctx: KoaContext): Promise<void> {
   }
 
   const { authorization } = ctx.header
-  const { query, variables, operationName } = ctx.request.body
+  const { query, variables, operationName } = getGraphQLParams(ctx)
 
   const viewer = verifyViewer(authorization)
   const loaders = createLoaders(viewer)
@@ -31,6 +31,22 @@ export default async function controller(ctx: KoaContext): Promise<void> {
   }
 
   ctx.body = result
+}
+
+function getGraphQLParams(ctx: KoaContext): GraphQLParams {
+  let { query, variables, operationName } = ctx.method === 'GET' ?
+    ctx.request.query :
+    ctx.request.body
+
+  if (typeof variables === 'string') {
+    try {
+      variables = JSON.parse(variables)
+    } catch (e) {
+      ctx.throw(400, 'Variables are invalid JSON')
+    }
+  }
+
+  return { query, variables, operationName }
 }
 
 function verifyViewer(authorization: ?string): ?Object {
