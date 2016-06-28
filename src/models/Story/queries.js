@@ -14,11 +14,11 @@ export const story = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object) => {
     const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 
-    assert(story, `${ args.id } not found`)
+    assert(story, 404, 'Story not found')
 
     return story
   }
@@ -27,5 +27,5 @@ export const story = {
 export const stories = {
   description: 'Returns a list of stories',
   type: new GraphQLList(StoryType),
-  resolve: ({ viewer }) => Story.find(viewer)
+  resolve: ({ viewer }: Object) => Story.find(viewer)
 }

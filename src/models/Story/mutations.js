@@ -11,11 +11,11 @@ export const createStory = {
     author: { type: new GraphQLNonNull(GraphQLID) },
     body: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const authorId = fromGid(args.author).id
     const author = await loaders['User'].load(authorId)
 
-    assert(author, `Author ${ args.author } not found`)
+    assert(author, 400, 'Author not found')
 
     const story = new Story({
       ...args,
@@ -36,11 +36,11 @@ export const updateStory = {
     id: { type: new GraphQLNonNull(GraphQLID) },
     body: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 
-    assert(story, `${ args.id } not found`)
+    assert(story, 404, 'Story not found')
 
     story.body = args.body
     story.save()
@@ -53,11 +53,11 @@ export const deleteStory = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const { id } = fromGid(args.id)
     const story = await loaders['Story'].load(id)
 
-    assert(story, `${ args.id } not found`)
+    assert(story, 404, 'Story not found')
 
     const author = await loaders['User'].load(story.author)
     if (author) {

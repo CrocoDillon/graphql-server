@@ -9,7 +9,7 @@ import { createLoaders } from './models/helpers'
 
 const graphiql = fs.readFileSync(path.join(__dirname, 'graphiql.html'), 'utf8')
 
-export default async function controller(ctx: KoaContext): Promise<void> {
+export default async function controller(ctx: Object): Promise<void> {
   if (ctx.method === 'GET' && ctx.accepts('html')) {
     // GraphiQL! \o/
     ctx.body = graphiql
@@ -33,7 +33,7 @@ export default async function controller(ctx: KoaContext): Promise<void> {
   ctx.body = result
 }
 
-function getGraphQLParams(ctx: KoaContext): GraphQLParams {
+function getGraphQLParams(ctx: Object): Object {
   let { query, variables, operationName } = ctx.method === 'GET' ?
     ctx.request.query :
     ctx.request.body

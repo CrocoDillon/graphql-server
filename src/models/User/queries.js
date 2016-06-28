@@ -18,13 +18,13 @@ export const token = {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve: (source, { email, password }) => User.getToken(email, password)
+  resolve: (source: Object, { email, password }: Object) => User.getToken(email, password)
 }
 
 export const viewer = {
   description: 'Returns the currently logged in user',
   type: UserType,
-  resolve: async (source, args, { viewer, loaders }) => {
+  resolve: async (source: Object, args: Object, { viewer, loaders }: Object) => {
     assert(viewer, 401, 'You’re not logged in')
     return await loaders['User'].load(viewer.id)
   }
@@ -39,7 +39,7 @@ export const user = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object) => {
     const { type, id } = fromGid(args.id)
     assert(type === 'User', 404, 'That’s not a user')
 
@@ -53,5 +53,5 @@ export const user = {
 export const users = {
   description: 'Returns a list of users',
   type: new GraphQLList(UserType),
-  resolve: (source, args, { viewer }) => User.find(viewer)
+  resolve: (source: Object, args: Object, { viewer }: Object) => User.find(viewer)
 }

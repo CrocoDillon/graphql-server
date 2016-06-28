@@ -14,18 +14,13 @@ export function assert(value: mixed, status: number, message: string): void {
     return
   }
 
-  if (typeof status === 'string') {
-    message = status
-    status = 500
-  }
-
-  const e = new Error(message)
+  const e: Object = new Error(message)
   e.status = status
   throw e
 }
 
 export function createGidField(type: string): Object {
-  assert(types.includes(type), `Expected a type and instead saw '${ type }'`)
+  assert(types.includes(type), 400, 'Expected a type')
 
   return {
     description: 'Globally unique id',
@@ -35,8 +30,8 @@ export function createGidField(type: string): Object {
 }
 
 export function toGid(type: string, id: string): string {
-  assert(types.includes(type), `Expected a type and instead saw '${ type }'`)
-  assert(idRe.test(id), `Expected an id and instead saw '${ id }'`)
+  assert(types.includes(type), 400, 'Expected a type')
+  assert(idRe.test(id), 400, 'Expected an id')
 
   return `${ type }(${ id })`
 }

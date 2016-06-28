@@ -12,7 +12,7 @@ export const createUser = {
     email: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) }
   },
-  resolve: async (source, args) => {
+  resolve: async (source: Object, args: Object): Promise<Object> => {
     const user = new User({
       ...args,
       password: await User.encryptPassword(args.password)
@@ -30,11 +30,11 @@ export const updateUser = {
     email: { type: GraphQLString },
     password: { type: GraphQLString }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const { id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
-    assert(user, `${ args.id } not found`)
+    assert(user, 404, 'User not found')
 
     if (args.name)
       user.name = args.name
@@ -53,11 +53,11 @@ export const deleteUser = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  resolve: async (source, args, { loaders }) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const { id } = fromGid(args.id)
     const user = await loaders['User'].load(id)
 
-    assert(user, `${ args.id } not found`)
+    assert(user, 404, 'User not found')
 
     user.remove()
     return user

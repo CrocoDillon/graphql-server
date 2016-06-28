@@ -13,7 +13,7 @@ export const node = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: (source, args, { loaders }) => {
+  resolve: (source: Object, args: Object, { loaders }: Object) => {
     const { type, id } = fromGid(args.id)
     return loaders[type].load(id)
   }

@@ -4,6 +4,17 @@ import data from '../../../data.json'
 
 export default class Story {
 
+  static async gen(viewer: ?Object, ids: Array<string>): Promise<Array<?Story>> {
+    return ids.map(id => {
+      const storyData = data.stories[id]
+      return storyData ? new Story(storyData) : null
+    })
+  }
+
+  static async find(): Promise<Array<Story>> {
+    return Object.values(data.stories).map((storyData: any) => new Story(storyData))
+  }
+
   id: string;
   author: string;
   body: string;
@@ -30,15 +41,4 @@ export default class Story {
       body: this.body
     }
   }
-}
-
-Story.gen = async function gen(viewer: ?Object, ids: Array<string>): Promise<Array<?Story>> {
-  return ids.map(id => {
-    const storyData = data.stories[id]
-    return storyData ? new Story(storyData) : null
-  })
-}
-
-Story.find = async function find(viewer: ?Object): Promise<Array<Story>> { // eslint-disable-line no-unused-vars
-  return Object.values(data.stories).map(storyData => new Story(storyData))
 }
