@@ -81,10 +81,10 @@ User.validatePassword = function validatePassword(password, hash) {
 
 User.getToken = async function getToken(email, password) {
   const user = Object.values(data.users).find(user => user.email === email)
-  assert(user, 'Unable to generate token') // Don’t leak any details
+  assert(user, 401, 'Unable to generate token') // Don’t leak any details
 
   const valid = await User.validatePassword(password, user.password)
-  assert(valid, 'Unable to generate token') // Don’t leak any details
+  assert(valid, 401, 'Unable to generate token') // Don’t leak any details
 
   return jsonwebtoken.sign({
     id: user.id,

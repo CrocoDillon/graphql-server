@@ -9,9 +9,19 @@ const types = ['User', 'Story']
 const idRe = /^[0-9a-f]{24}$/
 const gidRe = /^(User|Story)\(([0-9a-f]{24})\)$/
 
-export function assert(value: mixed, message: string): void {
-  if (value) return
-  throw new Error(message)
+export function assert(value: mixed, status: number, message: string): void {
+  if (value) {
+    return
+  }
+
+  if (typeof status === 'string') {
+    message = status
+    status = 500
+  }
+
+  const e = new Error(message)
+  e.status = status
+  throw e
 }
 
 export function createGidField(type: string): Object {
@@ -33,8 +43,7 @@ export function toGid(type: string, id: string): string {
 
 export function fromGid(gid: string): { type: string, id: string } {
   const match: any = gid.match(gidRe)
-
-  assert(match, `Expected a global id and instead saw '${ gid }'`)
+  assert(match, 400, 'Expected a global id')
 
   const [, type, id] = match
   return { type, id }

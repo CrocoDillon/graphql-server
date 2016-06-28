@@ -25,7 +25,7 @@ export const viewer = {
   description: 'Returns the currently logged in user',
   type: UserType,
   resolve: async (source, args, { viewer, loaders }) => {
-    assert(viewer, 'You’re not logged in')
+    assert(viewer, 401, 'You’re not logged in')
     return await loaders['User'].load(viewer.id)
   }
 }
@@ -40,10 +40,11 @@ export const user = {
     }
   },
   resolve: async (source, args, { loaders }) => {
-    const { id } = fromGid(args.id)
-    const user = await loaders['User'].load(id)
+    const { type, id } = fromGid(args.id)
+    assert(type === 'User', 404, 'That’s not a user')
 
-    assert(user, `${ args.id } not found`)
+    const user = await loaders['User'].load(id)
+    assert(user, 404, 'User not found')
 
     return user
   }
