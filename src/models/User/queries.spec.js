@@ -19,7 +19,7 @@ function formatErrors(result) {
   }
 }
 
-describe('User Queries Tests', () => {
+describe('User Query Tests', () => {
   describe('Basic Queries', () => {
     it('Returns a user given its global id', async () => {
       const query = `

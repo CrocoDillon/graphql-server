@@ -2,7 +2,7 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql'
 
 import NodeInterface from './interfaces'
-import { fromGid } from '../helpers'
+import { assert, fromGid } from '../helpers'
 
 export const node = {
   description: 'Returns a node given its globally unique id',
@@ -13,8 +13,12 @@ export const node = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: (source: Object, args: Object, { loaders }: Object) => {
+  resolve: async (source: Object, args: Object, { loaders }: Object) => {
     const { type, id } = fromGid(args.id)
-    return loaders[type].load(id)
+
+    const node = await loaders[type].load(id)
+    assert(node, 404, 'Node not found')
+
+    return node
   }
 }
