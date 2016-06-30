@@ -4,7 +4,6 @@ import { graphql } from 'graphql'
 
 import schema from '../../schema'
 import { createLoaders } from '../helpers'
-import Story from './model'
 
 const loaders = createLoaders(null)
 const context = { loaders }

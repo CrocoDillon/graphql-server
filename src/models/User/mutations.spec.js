@@ -4,20 +4,9 @@ import { graphql } from 'graphql'
 
 import schema from '../../schema'
 import { createLoaders } from '../helpers'
-import User from './model'
 
 const loaders = createLoaders(null)
 const context = { loaders }
-
-function formatErrors(result) {
-  if (result.errors) {
-    result.errors = result.errors
-      // Sort on line number
-      .sort((e1, e2) => e1.locations[0].line - e2.locations[0].line)
-      // Return status and message of original error
-      .map(({ originalError: { status, message } }) => ({ status, message }))
-  }
-}
 
 describe('User Mutation Tests', () => {
   let id

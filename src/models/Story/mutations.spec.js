@@ -4,7 +4,6 @@ import { graphql } from 'graphql'
 
 import schema from '../../schema'
 import { createLoaders } from '../helpers'
-import Story from './model'
 
 const loaders = createLoaders(null)
 const context = { loaders }
@@ -52,6 +51,56 @@ describe('Story Mutation Tests', () => {
       expected.data.createStory.id = id
 
       expect(id).to.match(/^Story\(([0-9a-f]{24})\)$/)
+      expect(result).to.be.deep.equal(expected)
+    })
+
+    it('Does not create a new story if author is not found', async () => {
+      const query = `
+        mutation CreateStory {
+          createStory(author: "User(0123456789abcdef01234567)", body: "Casino Royale") {
+            id
+          }
+        }
+      `
+      const expected = {
+        data: {
+          createStory: null
+        },
+        errors: [
+          { status: 400, message: 'Author not found' }
+        ]
+      }
+
+      const result = await graphql(schema, query, null, context)
+      formatErrors(result)
+
+      expect(result).to.be.deep.equal(expected)
+    })
+
+    it('Adds created story to author’s list of stories', async () => {
+      const query = `
+        {
+          user(id: "User(5331ef9454b7d7fe67f9a258)") {
+            name
+            stories {
+              body
+            }
+          }
+        }
+      `
+      const expected = {
+        data: {
+          user: {
+            name: 'Ian Fleming',
+            stories: [
+              { body: 'Casino Royale' }
+            ]
+          }
+        }
+      }
+
+      const result = await graphql(schema, query, null, context)
+
       expect(result).to.be.deep.equal(expected)
     })
   })
