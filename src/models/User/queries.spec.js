@@ -155,8 +155,8 @@ describe('User Query Tests', () => {
     it('Returns no token if credentials are incorrect', async () => {
       const query = `
         {
-          userNotFound: token(email: "flaming@graphql.org", password: "fleming")
-          incorrectPassword: token(email: "fleming@graphql.org", password: "flaming")
+          userNotFound: token(email: "incorrect@graphql.org", password: "fleming")
+          incorrectPassword: token(email: "fleming@graphql.org", password: "incorrect")
         }
       `
       const expected = {

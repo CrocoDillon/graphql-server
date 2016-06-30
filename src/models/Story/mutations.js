@@ -14,7 +14,6 @@ export const createStory = {
   resolve: async (source: Object, args: Object, { loaders }: Object): Promise<Object> => {
     const authorId = fromGid(args.author).id
     const author = await loaders['User'].load(authorId)
-
     assert(author, 400, 'Author not found')
 
     const story = new Story({

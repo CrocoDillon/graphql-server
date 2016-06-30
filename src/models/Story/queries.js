@@ -15,9 +15,10 @@ export const story = {
     }
   },
   resolve: async (source: Object, args: Object, { loaders }: Object) => {
-    const { id } = fromGid(args.id)
-    const story = await loaders['Story'].load(id)
+    const { type, id } = fromGid(args.id)
+    assert(type === 'Story', 404, 'That’s not a story')
 
+    const story = await loaders['Story'].load(id)
     assert(story, 404, 'Story not found')
 
     return story
@@ -27,5 +28,5 @@ export const story = {
 export const stories = {
   description: 'Returns a list of stories',
   type: new GraphQLList(StoryType),
-  resolve: ({ viewer }: Object) => Story.find(viewer)
+  resolve: (source: Object, args: Object, { viewer }: Object) => Story.find(viewer)
 }
