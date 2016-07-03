@@ -44,14 +44,6 @@ export function fromGid(gid: string): { type: string, id: string } {
   return { type, id }
 }
 
-export function randomId(): string {
-  const digits = new Array(24)
-  for (let i = 0; i < digits.length; i++) {
-    digits[i] = Math.floor(16 * Math.random()).toString(16)
-  }
-  return digits.join('')
-}
-
 export function createLoaders(viewer: ?Object): Object {
   return {
     User: new DataLoader(ids => User.gen(viewer, ids)),

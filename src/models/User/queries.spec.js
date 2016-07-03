@@ -24,7 +24,7 @@ describe('User Query Tests', () => {
     it('Returns a user given its global id', async () => {
       const query = `
         {
-          user(id: "User(3c93786230569de834c64f93)") {
+          user(id: "User(5779131ce6d02601dd2fc485)") {
             id
             name
             email
@@ -34,7 +34,7 @@ describe('User Query Tests', () => {
       const expected = {
         data: {
           user: {
-            id: 'User(3c93786230569de834c64f93)',
+            id: 'User(5779131ce6d02601dd2fc485)',
             name: 'H.G. Wells',
             email: 'wells@graphql.org'
           }
@@ -52,10 +52,10 @@ describe('User Query Tests', () => {
           notFound: user(id: "User(0123456789abcdef01234567)") {
             name
           }
-          notUser: user(id: "Story(29ca2bda1b2c6b824aae3571)") {
+          notUser: user(id: "Story(577915ebe6d02601dd2fc490)") {
             name
           }
-          notGid: user(id: "3c93786230569de834c64f93") {
+          notGid: user(id: "5779131ce6d02601dd2fc486") {
             name
           }
         }
@@ -108,7 +108,7 @@ describe('User Query Tests', () => {
     it('Returns a list of stories told by a user', async () => {
       const query = `
         {
-          user(id: "User(d742aeac61abb98f5133ab45)") {
+          user(id: "User(5779131ce6d02601dd2fc487)") {
             name
             stories {
               id
@@ -121,8 +121,8 @@ describe('User Query Tests', () => {
           user: {
             name: 'Jules Verne',
             stories: [
-              { id: 'Story(29ca2bda1b2c6b824aae3571)' },
-              { id: 'Story(24373f3c5ec9bcf5675944fd)' }
+              { id: 'Story(577915ebe6d02601dd2fc491)' },
+              { id: 'Story(577915ebe6d02601dd2fc492)' }
             ]
           }
         }
@@ -149,7 +149,7 @@ describe('User Query Tests', () => {
 
       const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
 
-      expect(payload.id).to.be.equal('5331ef9454b7d7fe67f9a258')
+      expect(payload.id).to.be.equal('5779131ce6d02601dd2fc488')
     })
 
     it('Returns no token if credentials are incorrect', async () => {
@@ -189,7 +189,7 @@ describe('User Query Tests', () => {
       const expected = {
         data: {
           viewer: {
-            id: 'User(5331ef9454b7d7fe67f9a258)',
+            id: 'User(5779131ce6d02601dd2fc488)',
             name: 'Ian Fleming',
             email: 'fleming@graphql.org'
           }

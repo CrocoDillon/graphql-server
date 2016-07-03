@@ -60,7 +60,7 @@ export const deleteStory = {
 
     const author = await loaders['User'].load(story.author)
     if (author) {
-      author.stories = author.stories.filter(sid => sid !== id)
+      author.stories = author.stories.filter(sid => String(sid) !== id)
       author.save()
     }
 

@@ -23,7 +23,7 @@ describe('Node Query Tests', () => {
     it('Returns a user given its global id', async () => {
       const query = `
         {
-          node(id: "User(3c93786230569de834c64f93)") {
+          node(id: "User(5779131ce6d02601dd2fc485)") {
             ...UserFragment
           }
         }
@@ -36,7 +36,7 @@ describe('Node Query Tests', () => {
       const expected = {
         data: {
           node: {
-            id: 'User(3c93786230569de834c64f93)',
+            id: 'User(5779131ce6d02601dd2fc485)',
             name: 'H.G. Wells',
             email: 'wells@graphql.org'
           }
@@ -51,7 +51,7 @@ describe('Node Query Tests', () => {
     it('Returns a story given its global id', async () => {
       const query = `
         {
-          node(id: "Story(5cbba191905f6160f4b39365)") {
+          node(id: "Story(577915ebe6d02601dd2fc48f)") {
             ...StoryFragment
           }
         }
@@ -63,7 +63,7 @@ describe('Node Query Tests', () => {
       const expected = {
         data: {
           node: {
-            id: 'Story(5cbba191905f6160f4b39365)',
+            id: 'Story(577915ebe6d02601dd2fc48f)',
             body: 'The Island of Doctor Moreau'
           }
         }
@@ -80,7 +80,7 @@ describe('Node Query Tests', () => {
           notFound: node(id: "User(0123456789abcdef01234567)") {
             id
           }
-          notGid: node(id: "3c93786230569de834c64f93") {
+          notGid: node(id: "5779131ce6d02601dd2fc486") {
             id
           }
         }
@@ -107,7 +107,7 @@ describe('Node Query Tests', () => {
     it('Resolves to correct type for users', async () => {
       const query = `
         {
-          node(id: "User(d742aeac61abb98f5133ab45)") {
+          node(id: "User(5779131ce6d02601dd2fc487)") {
             __typename
           }
         }
@@ -128,7 +128,7 @@ describe('Node Query Tests', () => {
     it('Resolves to correct type for stories', async () => {
       const query = `
         {
-          node(id: "Story(ed0fdb79505bbdaa7bafc609)") {
+          node(id: "Story(577915ebe6d02601dd2fc492)") {
             __typename
           }
         }

@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'test') {
   throw new Error('Running tests require NODE_ENV=test')
 }
 
+require('./src/database')
+
 global.expect = require('chai').expect
 
 // Load tests

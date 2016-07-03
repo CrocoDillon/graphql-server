@@ -1,44 +1,26 @@
 // @flow
-import { randomId } from '../helpers'
-import data from '../../../data.json'
+/* eslint no-use-before-define: 0 */
+import mongoose from 'mongoose'
 
-export default class Story {
-
-  static async gen(viewer: ?Object, ids: Array<string>): Promise<Array<?Story>> {
-    return ids.map(id => {
-      const storyData = data.stories[id]
-      return storyData ? new Story(storyData) : null
-    })
+const StorySchema = new mongoose.Schema({
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
+  body: {
+    type: String,
+    required: true
   }
+})
 
-  static async find(): Promise<Array<Story>> {
-    return Object.values(data.stories).map((storyData: any) => new Story(storyData))
-  }
-
-  id: string;
-  author: string;
-  body: string;
-
-  constructor({ id, author, body }: Object) {
-    this.id = id || randomId()
-
-    this.author = author
-    this.body = body
-  }
-
-  save() {
-    data.stories[this.id] = this.serialize()
-  }
-
-  remove() {
-    delete data.stories[this.id]
-  }
-
-  serialize() {
-    return {
-      id: this.id,
-      author: this.author,
-      body: this.body
-    }
-  }
+StorySchema.statics.gen = async function gen(viewer: ?Object, ids: Array<string>): Promise<Array<?Story>> {
+  return Promise.all(ids.map(id => Story.findById(id).exec()))
 }
+
+StorySchema.statics.find = async function find(): Promise<Array<Story>> {
+  return mongoose.Model.find.call(this).sort('_id').exec()
+}
+
+const Story = mongoose.model('Story', StorySchema, 'stories')
+
+export default Story

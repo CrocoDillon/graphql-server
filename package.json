@@ -12,7 +12,17 @@
     "lint": "eslint .",
     "test": "NODE_ENV=test mocha mocha.config.js",
     "flow": "flow",
-    "flow:stop": "flow stop"
+    "flow:stop": "flow stop",
+    "mongo": "mkdir -p ./data/db && npm run mongo:run",
+    "mongo:run": "docker run --name mongodb-graphql -v $PWD/data/db:/data/db -p 27017:27017 -d mongo:3.2",
+    "mongo:export": "npm run mongo:export:users && npm run mongo:export:stories",
+    "mongo:export:users": "docker run -v $PWD/data:/data --link mongodb-graphql:db --rm mongo:3.2 sh -c 'exec mongoexport -h \"$DB_PORT_27017_TCP_ADDR:$DB_PORT_27017_TCP_PORT\" -d graphql -c users --out /data/users.json'",
+    "mongo:export:stories": "docker run -v $PWD/data:/data --link mongodb-graphql:db --rm mongo:3.2 sh -c 'exec mongoexport -h \"$DB_PORT_27017_TCP_ADDR:$DB_PORT_27017_TCP_PORT\" -d graphql -c stories --out /data/stories.json'",
+    "mongo:import": "npm run mongo:import:users && npm run mongo:import:stories",
+    "mongo:import:users": "docker run -v $PWD/data:/data --link mongodb-graphql:db --rm mongo:3.2 sh -c 'exec mongoimport -h \"$DB_PORT_27017_TCP_ADDR:$DB_PORT_27017_TCP_PORT\" -d graphql -c users --drop --file /data/users.json'",
+    "mongo:import:stories": "docker run -v $PWD/data:/data --link mongodb-graphql:db --rm mongo:3.2 sh -c 'exec mongoimport -h \"$DB_PORT_27017_TCP_ADDR:$DB_PORT_27017_TCP_PORT\" -d graphql -c stories --drop --file /data/stories.json'",
+    "mongo:dba": "docker run -it --link mongodb-graphql:db --rm mongo:3.2 sh -c 'exec mongo \"$DB_PORT_27017_TCP_ADDR:$DB_PORT_27017_TCP_PORT/graphql\"'",
+    "mongo:stop": "docker stop mongodb-graphql 1> /dev/null && docker rm mongodb-graphql 1> /dev/null"
   },
   "repository": {
     "type": "git",
@@ -23,6 +33,7 @@
     "graphql",
     "relay",
     "koa",
+    "mongodb",
     "jsonwebtoken",
     "jwt"
   ],
@@ -36,7 +47,8 @@
     "jsonwebtoken": "^7.0.1",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.1.0",
-    "koa-router": "^7.0.1"
+    "koa-router": "^7.0.1",
+    "mongoose": "^4.5.3"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",

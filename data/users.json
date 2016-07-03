@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5779131ce6d02601dd2fc485"},"name":"H.G. Wells","email":"wells@graphql.org","password":"$2a$10$fzz9STJlDb9En4q3gtLff.RXxzKolnV3qQr0DhN1A222q3quVQ6ZO","stories":[{"$oid":"577915ebe6d02601dd2fc48e"},{"$oid":"577915ebe6d02601dd2fc48f"},{"$oid":"577915ebe6d02601dd2fc490"}]}
+{"_id":{"$oid":"5779131ce6d02601dd2fc486"},"name":"Edgar Allan Poe","email":"poe@graphql.org","password":"$2a$10$D83M66mRwZwCLhhC8a4RseECdb8KCg7N6IxZFH5OflnIlL9KfMKNC"}
+{"_id":{"$oid":"5779131ce6d02601dd2fc487"},"name":"Jules Verne","email":"verne@graphql.org","password":"$2a$10$bPcQMIMv4dmEq5hK/hd36eq/8KMpmkt4MGr5ks3nxoKhWv/lwfHHC","stories":[{"$oid":"577915ebe6d02601dd2fc491"},{"$oid":"577915ebe6d02601dd2fc492"}]}
+{"_id":{"$oid":"5779131ce6d02601dd2fc488"},"name":"Ian Fleming","email":"fleming@graphql.org","password":"$2a$10$KYf699fRl.61rmn.0/CniuA5Q9xd7yqm2367R9icaFTPxuWHybVoW"}

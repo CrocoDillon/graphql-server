@@ -25,7 +25,7 @@ describe('Story Mutation Tests', () => {
     it('Creates a new story', async () => {
       const query = `
         mutation CreateStory {
-          createStory(author: "User(5331ef9454b7d7fe67f9a258)", body: "Casino Royale") {
+          createStory(author: "User(5779131ce6d02601dd2fc488)", body: "Casino Royale") {
             id
             author {
               id
@@ -38,7 +38,7 @@ describe('Story Mutation Tests', () => {
         data: {
           createStory: {
             author: {
-              id: 'User(5331ef9454b7d7fe67f9a258)'
+              id: 'User(5779131ce6d02601dd2fc488)'
             },
             body: 'Casino Royale'
           }
@@ -80,7 +80,7 @@ describe('Story Mutation Tests', () => {
     it('Adds created story to author’s list of stories', async () => {
       const query = `
         {
-          user(id: "User(5331ef9454b7d7fe67f9a258)") {
+          user(id: "User(5779131ce6d02601dd2fc488)") {
             name
             stories {
               body

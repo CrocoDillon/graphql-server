@@ -23,7 +23,7 @@ describe('Story Query Tests', () => {
     it('Returns a story given its global id', async () => {
       const query = `
         {
-          story(id: "Story(24373f3c5ec9bcf5675944fd)") {
+          story(id: "Story(577915ebe6d02601dd2fc491)") {
             id
             body
           }
@@ -32,7 +32,7 @@ describe('Story Query Tests', () => {
       const expected = {
         data: {
           story: {
-            id: 'Story(24373f3c5ec9bcf5675944fd)',
+            id: 'Story(577915ebe6d02601dd2fc491)',
             body: 'Twenty Thousand Leagues Under the Sea'
           }
         }
@@ -49,10 +49,10 @@ describe('Story Query Tests', () => {
           notFound: story(id: "Story(0123456789abcdef01234567)") {
             body
           }
-          notStory: story(id: "User(5331ef9454b7d7fe67f9a258)") {
+          notStory: story(id: "User(5779131ce6d02601dd2fc486)") {
             body
           }
-          notGid: story(id: "5cbba191905f6160f4b39365") {
+          notGid: story(id: "577915ebe6d02601dd2fc48e") {
             body
           }
         }
@@ -89,9 +89,9 @@ describe('Story Query Tests', () => {
           stories: [
             { body: 'The Time Machine' },
             { body: 'The Island of Doctor Moreau' },
-            { body: 'Journey to the Center of the Earth' },
             { body: 'The War of the Worlds' },
-            { body: 'Twenty Thousand Leagues Under the Sea' }
+            { body: 'Twenty Thousand Leagues Under the Sea' },
+            { body: 'Journey to the Center of the Earth' }
           ]
         }
       }
@@ -106,7 +106,7 @@ describe('Story Query Tests', () => {
     it('Returns the user that authored a story', async () => {
       const query = `
         {
-          story(id: "Story(ed0fdb79505bbdaa7bafc609)") {
+          story(id: "Story(577915ebe6d02601dd2fc490)") {
             author {
               id
             }
@@ -118,7 +118,7 @@ describe('Story Query Tests', () => {
         data: {
           story: {
             author: {
-              id: 'User(3c93786230569de834c64f93)'
+              id: 'User(5779131ce6d02601dd2fc485)'
             },
             body: 'The War of the Worlds'
           }

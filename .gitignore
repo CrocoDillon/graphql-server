@@ -1,3 +1,4 @@
+data/db
 lib
 node_modules
 *.log
